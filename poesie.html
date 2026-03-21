@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Atelier des Poèmes v3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --primary-color: #4a5759;
+            --card-background: #ffffff;
+            --border-color: #dee2e6;
+            --due-color: #d1ecf1;
+        }
+        body { background-color: var(--background-color); color: var(--text-color); font-family: 'Georgia', serif; }
+        .container { max-width: 800px; }
+        .main-card { background-color: var(--card-background); border: 1px solid var(--border-color); border-radius: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        #poem-display, #evaluation-diff { font-size: 1.2rem; line-height: 2; white-space: pre-wrap; padding: 2rem; border-radius: 0.5rem; background-color: #fdfdfd; min-height: 150px;}
+        .view { display: none; }
+        .view.active { display: block; }
+        .poem-list-item.due { background-color: var(--due-color); }
+        .diff-correct { color: green; }
+        .diff-incorrect { color: red; text-decoration: line-through; }
+        .hidden-word { background-color: var(--text-color); color: var(--text-color); border-radius: 4px; cursor: pointer; transition: background-color 0.2s ease-in-out; }
+        .hidden-word:hover { background-color: #555; }
+    </style>
+</head>
+<body class="py-5">
+
+    <div class="container">
+        <div class="main-card p-4 p-md-5">
+            <header class="text-center mb-4">
+                <h1>L'Atelier des Poèmes</h1>
+                <p class="lead">Apprenez vos poèmes, strophe par strophe.</p>
+            </header>
+
+            <!-- Vue Bibliothèque -->
+            <div id="library-view" class="view active">
+                <div class="d-grid gap-2 mb-4">
+                    <button id="start-review-btn" class="btn btn-primary btn-lg">Commencer la révision (0)</button>
+                    <button id="add-new-btn" class="btn btn-outline-secondary">Ajouter un nouveau poème</button>
+                </div>
+                <div id="poem-library-list"></div>
+            </div>
+
+            <!-- Vue de Saisie -->
+            <div id="input-view" class="view">
+                <div class="form-group">
+                    <textarea id="poem-text-input" class="form-control" rows="15" placeholder="Collez votre poème ici..."></textarea>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <button id="save-poem-btn" class="btn btn-success">Enregistrer</button>
+                    <button class="cancel-btn btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+
+            <!-- Vue de Révision -->
+            <div id="review-view" class="view">
+                <h3 id="review-poem-title" class="text-center mb-3"></h3>
+                <div id="poem-display" class="mb-3"></div>
+                
+                <div id="assist-controls" class="d-flex gap-2 mb-3">
+                    <button id="assist-first-letter-btn" class="btn btn-sm btn-outline-info">Aide: Premières Lettres</button>
+                    <button id="assist-hide-words-btn" class="btn btn-sm btn-outline-warning">Aide: Mots Cachés</button>
+                </div>
+
+                <div id="evaluation-input-container" style="display:none;">
+                    <textarea id="evaluation-input" class="form-control mb-2" rows="8" placeholder="Récitez le morceau ici..."></textarea>
+                    <button id="submit-evaluation-btn" class="btn btn-primary">Évaluer ma mémoire</button>
+                </div>
+                <div id="evaluation-diff" class="mb-3" style="display:none;"></div>
+                <div id="feedback-buttons" class="d-flex justify-content-around" style="display:none;">
+                    <button class="btn btn-danger feedback-btn" data-quality="0">🟥 Difficile</button>
+                    <button class="btn btn-warning feedback-btn" data-quality="3">🟨 Correct</button>
+                    <button class="btn btn-success feedback-btn" data-quality="5">🟩 Facile</button>
+                </div>
+                 <button id="show-answer-btn" class="btn btn-info mt-2">Afficher la réponse</button>
+                 <button id="start-evaluation-btn" class="btn btn-primary mt-2">J'ai mémorisé, passer à l'évaluation</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // --- Simple Diff Algorithm ---
+    function diffWords(oldStr, newStr) { /* ... (same as v2) ... */ return ''; }
+
+    // --- DOM Elements ---
+    const views = { library: document.getElementById('library-view'), input: document.getElementById('input-view'), review: document.getElementById('review-view') };
+    const startReviewBtn = document.getElementById('start-review-btn');
+    const addNewBtn = document.getElementById('add-new-btn');
+    const poemLibraryList = document.getElementById('poem-library-list');
+    const poemTextInput = document.getElementById('poem-text-input');
+    const savePoemBtn = document.getElementById('save-poem-btn');
+    const cancelBtns = document.querySelectorAll('.cancel-btn');
+    const reviewPoemTitle = document.getElementById('review-poem-title');
+    const poemDisplay = document.getElementById('poem-display');
+    const assistControls = document.getElementById('assist-controls');
+    const assistFirstLetterBtn = document.getElementById('assist-first-letter-btn');
+    const assistHideWordsBtn = document.getElementById('assist-hide-words-btn');
+    const evaluationInputContainer = document.getElementById('evaluation-input-container');
+    const evaluationInput = document.getElementById('evaluation-input');
+    const submitEvaluationBtn = document.getElementById('submit-evaluation-btn');
+    const evaluationDiff = document.getElementById('evaluation-diff');
+    const feedbackButtons = document.getElementById('feedback-buttons');
+    const showAnswerBtn = document.getElementById('show-answer-btn');
+    const startEvaluationBtn = document.getElementById('start-evaluation-btn');
+
+    // --- Database (LocalStorage) ---
+    const db = {
+        getPoems: () => JSON.parse(localStorage.getItem('poems_v3') || '{}'),
+        savePoems: (poems) => localStorage.setItem('poems_v3', JSON.stringify(poems)),
+    };
+
+    // --- SRS Algorithm (same as v2) ---
+    const srs = { /* ... (same as v2) ... */ };
+    srs.update = (chunk, quality) => {
+        if (quality < 3) {
+            chunk.srs.stage = 0;
+            chunk.srs.interval = 1;
+        } else {
+            if (chunk.srs.stage === 0) chunk.srs.interval = 1;
+            else if (chunk.srs.stage === 1) chunk.srs.interval = 5;
+            else chunk.srs.interval = Math.round(chunk.srs.interval * chunk.srs.easeFactor);
+            
+            chunk.srs.easeFactor += (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+            if (chunk.srs.easeFactor < 1.3) chunk.srs.easeFactor = 1.3;
+            chunk.srs.stage++;
+        }
+        const nextReviewDate = new Date();
+        nextReviewDate.setDate(nextReviewDate.getDate() + chunk.srs.interval);
+        chunk.srs.nextReview = nextReviewDate.toISOString().split('T')[0];
+        return chunk;
+    };
+
+
+    // --- App State ---
+    let state = { poems: {}, reviewQueue: [], currentChunk: null };
+
+    // --- View Logic ---
+    function showView(viewName) { Object.values(views).forEach(v => v.classList.remove('active')); views[viewName].classList.add('active'); }
+
+    function renderLibrary() {
+        poemLibraryList.innerHTML = '';
+        const today = new Date().toISOString().split('T')[0];
+        let totalDue = 0;
+
+        for (const poemId in state.poems) {
+            const poem = state.poems[poemId];
+            const dueChunks = poem.chunks.filter(c => c.srs.nextReview <= today && c.srs.stage > -1);
+            totalDue += dueChunks.length;
+            
+            const learningChunks = poem.chunks.filter(c => c.srs.stage > -1);
+            const progress = (learningChunks.length / poem.chunks.length) * 100;
+
+            const div = document.createElement('div');
+            div.className = 'p-3 mb-2 border rounded';
+            if (dueChunks.length > 0) div.classList.add('due');
+            div.innerHTML = `
+                <h5>${poem.title}</h5>
+                <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted">Apprentissage: ${learningChunks.length} / ${poem.chunks.length} morceaux. ${dueChunks.length} à réviser.</small>
+                <button class="btn btn-sm btn-outline-danger float-end delete-poem-btn" data-id="${poem.id}"><i class="bi bi-trash"></i></button>
+            `;
+            poemLibraryList.appendChild(div);
+        }
+        startReviewBtn.textContent = `Commencer la révision (${totalDue})`;
+        startReviewBtn.disabled = totalDue === 0;
+    }
+
+    // --- Review Logic ---
+    function applyAssist(mode) {
+        const text = state.currentChunk.text;
+        poemDisplay.innerHTML = '';
+        if (mode === 'first-letter') {
+            poemDisplay.textContent = text.split(/\s+/).map(word => word.trim() ? word[0] : '').join(' ');
+        } else if (mode === 'hide-words') {
+            const words = text.split(/(\s+)/);
+            words.forEach(word => {
+                if (word.trim() !== '' && Math.random() > 0.5) {
+                    const span = document.createElement('span');
+                    span.className = 'hidden-word';
+                    span.textContent = word;
+                    span.dataset.original = word;
+                    span.addEventListener('mouseover', () => {
+                        span.textContent = span.dataset.original;
+                        span.classList.remove('hidden-word');
+                    }, { once: true });
+                    poemDisplay.appendChild(span);
+                } else {
+                    poemDisplay.appendChild(document.createTextNode(word));
+                }
+            });
+        }
+    }
+
+    function startReview() {
+        const today = new Date().toISOString().split('T')[0];
+        state.reviewQueue = [];
+        for (const poemId in state.poems) {
+            state.poems[poemId].chunks.forEach(chunk => {
+                if (chunk.srs.nextReview <= today && chunk.srs.stage > -1) {
+                    state.reviewQueue.push(chunk);
+                }
+            });
+        }
+        if (state.reviewQueue.length > 0) loadNextChunkInQueue();
+        else alert("Aucun morceau à réviser aujourd'hui !");
+    }
+
+    function loadNextChunkInQueue() {
+        if (state.reviewQueue.length === 0) { showView('library'); init(); return; }
+        state.currentChunk = state.reviewQueue.shift();
+        const poem = state.poems[state.currentChunk.poemId];
+        reviewPoemTitle.textContent = `${poem.title} (Morceau ${state.currentChunk.index + 1}/${poem.chunks.length})`;
+        
+        applyAssist('first-letter');
+
+        evaluationInput.value = '';
+        evaluationInputContainer.style.display = 'none';
+        submitEvaluationBtn.style.display = 'none';
+        evaluationDiff.style.display = 'none';
+        feedbackButtons.style.display = 'none';
+        showAnswerBtn.style.display = 'block';
+        assistControls.style.display = 'flex';
+        startEvaluationBtn.style.display = 'block';
+        
+        showView('review');
+    }
+
+    function handleFeedback(quality) {
+        state.currentChunk = srs.update(state.currentChunk, quality);
+        
+        // Unlock next chunk if this one was easy
+        if (quality === 5) {
+            const poem = state.poems[state.currentChunk.poemId];
+            const nextChunkIndex = state.currentChunk.index + 1;
+            if (nextChunkIndex < poem.chunks.length) {
+                const nextChunk = poem.chunks[nextChunkIndex];
+                if (nextChunk.srs.stage === -1) { // If locked
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    nextChunk.srs.stage = 0;
+                    nextChunk.srs.nextReview = tomorrow.toISOString().split('T')[0];
+                }
+            }
+        }
+        
+        db.savePoems(state.poems);
+        loadNextChunkInQueue();
+    }
+
+    // --- Event Listeners ---
+    addNewBtn.addEventListener('click', () => { poemTextInput.value = ''; showView('input'); });
+    cancelBtns.forEach(btn => btn.addEventListener('click', () => showView('library')));
+
+    savePoemBtn.addEventListener('click', () => {
+        const text = poemTextInput.value.trim();
+        if (!text) return;
+        
+        const chunksRaw = text.split(/\n\s*\n/); // Split by double newline
+        const poemId = Date.now();
+        const newPoem = {
+            id: poemId,
+            title: text.split('\n')[0] || 'Poème sans titre',
+            chunks: [],
+        };
+
+        const today = new Date().toISOString().split('T')[0];
+        const future = new Date('9999-12-31').toISOString().split('T')[0];
+
+        newPoem.chunks = chunksRaw.map((chunkText, index) => ({
+            id: Date.now() + index,
+            poemId: poemId,
+            index: index,
+            text: chunkText.trim(),
+            srs: {
+                stage: index === 0 ? 0 : -1, // -1 means locked
+                interval: 1,
+                easeFactor: 2.5,
+                nextReview: index === 0 ? today : future,
+            }
+        }));
+        
+        state.poems[poemId] = newPoem;
+        db.savePoems(state.poems);
+        showView('library');
+        init();
+    });
+    
+    poemLibraryList.addEventListener('click', (e) => {
+        if (e.target.closest('.delete-poem-btn')) {
+            const id = e.target.closest('.delete-poem-btn').dataset.id;
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce poème et sa progression ?')) {
+                delete state.poems[id];
+                db.savePoems(state.poems);
+                init();
+            }
+        }
+    });
+
+    startReviewBtn.addEventListener('click', startReview);
+    startEvaluationBtn.addEventListener('click', () => {
+        evaluationInputContainer.style.display = 'block';
+        submitEvaluationBtn.style.display = 'block';
+        startEvaluationBtn.style.display = 'none';
+        assistControls.style.display = 'none';
+        showAnswerBtn.style.display = 'none';
+    });
+    submitEvaluationBtn.addEventListener('click', () => {
+        const originalText = state.currentChunk.text;
+        const userText = evaluationInput.value;
+        evaluationDiff.innerHTML = diffWords(originalText, userText); // You need to re-implement diffWords
+        evaluationDiff.style.display = 'block';
+        feedbackButtons.style.display = 'flex';
+        submitEvaluationBtn.style.display = 'none';
+    });
+    feedbackButtons.addEventListener('click', (e) => {
+        if (e.target.closest('.feedback-btn')) handleFeedback(parseInt(e.target.closest('.feedback-btn').dataset.quality));
+    });
+    showAnswerBtn.addEventListener('click', () => { poemDisplay.textContent = state.currentChunk.text; });
+    assistFirstLetterBtn.addEventListener('click', () => applyAssist('first-letter'));
+    assistHideWordsBtn.addEventListener('click', () => applyAssist('hide-words'));
+
+
+    // --- Init ---
+    function init() {
+        state.poems = db.getPoems();
+        renderLibrary();
+    }
+
+    // Re-implement diffWords properly
+    diffWords = function(oldStr, newStr) {
+        const oldWords = oldStr.trim().split(/\s+/);
+        const newWords = newStr.trim().split(/\s+/);
+        const dmp = new diff_match_patch();
+        const diff = dmp.diff_main(newStr, oldStr);
+        dmp.diff_cleanupSemantic(diff);
+        return dmp.diff_prettyHtml(diff).replace(/&para;/g, '');
+    };
+    
+    // Load diff_match_patch library
+    const dmpScript = document.createElement('script');
+    dmpScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js';
+    dmpScript.onload = init;
+    document.head.appendChild(dmpScript);
+
+    </script>
+</body>
+</html>

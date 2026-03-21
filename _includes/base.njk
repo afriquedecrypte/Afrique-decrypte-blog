@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or "Afrique Decrypte" }}</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/logo-afrique-decrypte.png" type="image/png">
+</head>
+<body>
+    <header>
+        <a href="/"><img src="/logo-afrique-decrypte.png" alt="Logo Afrique Decrypte" class="logo"></a>
+        <h1><a href="/">Afrique Decrypte</a></h1>
+    </header>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="/">Articles</a></li>
+            <li><a href="/about/">Qui sommes nous</a></li>
+        </ul>
+    </nav>
+    <main>
+        {{ content | safe }}
+    </main>
+    <footer>
+        <div class="social-links">
+            <a href="https://open.spotify.com/show/0Qv8C5mIAasC9tX8zHdO2t?si=8c60aecbccdc4328" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-spotify" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/>
+                </svg>
+            </a>
+            <a href="http://www.youtube.com/@afrique_decrypte" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.356 1.178.362 2.01 1.163 2.31 2.546C15.59 5.699 15.59 8 15.59 8s0 2.301-.22 3.391c-.31.486-.665.95-1.093 1.318-.373.3-.745.54-1.13.716-.387.176-1.13.32-2.068.356C12.01 14.033 8.82 14.033 8.82 14.033h-.088c-.823-.003-4.988-.033-6.11-.356-1.178-.362-2.01-1.163-2.31-2.546C.41 10.301.41 8 .41 8s0-2.301.22-3.391c.31-.486.665-.95 1.093-1.318.373-.3.745-.54 1.13-.716.387-.176 1.13-.32 2.068-.356C4.99 1.967 8.051 1.999 8.051 1.999Zm-6.064 6.889v-.791l4.705-2.939v5.88l-4.705-2.95Z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/afrique-d%C3%A9crypte/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542V13.394h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025h.016V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                </svg>
+            </a>
+        </div>
+        <p>&copy; 2026 Afrique Decrypte</p>
+    </footer>
+</body>
+</html>
