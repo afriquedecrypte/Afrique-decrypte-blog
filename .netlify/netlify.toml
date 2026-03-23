@@ -7,7 +7,7 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/home/ubuntu/Documents/Gemini/Teste Gemini/_site"
+publish = "_site"
 publishOrigin = "ui"
 commandOrigin = "ui"
 command = "eleventy"
