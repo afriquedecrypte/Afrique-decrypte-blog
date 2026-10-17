@@ -11,6 +11,13 @@ Par la rédaction d'Afrique Décrypte
 
 Le concert des flagorneurs du panafricanisme de tribune a trouvé son nouveau trophée. À en croire les communiqués triomphalistes de Bamako et les relais numériques de l'Alliance des États du Sahel (AES), le Mali aurait mis à genoux le géant minier canadien Barrick Gold. Avec la reconduction pour dix ans du permis d'exploitation du complexe géant de Loulo-Gounkoto et l'application brutale du Code minier de 2023, la rhétorique officielle annonce l'avènement d'une « souveraineté économique totale » sur le sous-sol sahélien.
 
+<div class="article-images">
+    <figure>
+        <img src="/photos-blog/or-mali-barrick.jpg" alt="Complexe minier et lingots d'or au Mali">
+        <figcaption>L'or du Mali et Barrick Gold : l'extraction industrielle face aux limites de l'étatisme sahélien</figcaption>
+    </figure>
+</div>
+
 C’est une imposture intellectuelle complète.
 
 Derrière la mise en scène martiale et le chantage fiscal, l'accord conclu entre les colonels de Bamako et Mark Bristow ne marque aucun tournant historique. Il consacre au contraire la capitulation silencieuse de l'idéologie constructiviste face aux lois élémentaires de l'économie, et le triomphe millénaire d'un modèle que l'Afrique de l'Ouest n'a jamais su dépasser : le parasitisme de la rente.
