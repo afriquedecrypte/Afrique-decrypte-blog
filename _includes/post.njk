@@ -2,10 +2,39 @@
 layout: base.njk
 ---
 <article>
+    {% if image %}
+    <div class="article-hero-banner" style="background-image: url('{{ image }}');">
+        <div class="article-hero-overlay">
+            <h2>{{ title }}</h2>
+            <p class="date">Publié le {{ page.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
+            {% if author %}
+                <p class="author-tag">{{ author }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
     <h2>{{ title }}</h2>
     <p class="date">Publié le {{ page.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
-    {{ content | safe }}
-    {% if author %}
+    {% endif %}
+
+    {% if podcast %}
+    <div class="article-podcast-player">
+        <div class="podcast-info">
+            <span class="podcast-badge">🎙️ Épisode Audio / Podcast</span>
+            <span class="podcast-title">{{ title }}</span>
+        </div>
+        <audio controls preload="metadata" class="audio-control">
+            <source src="{{ podcast }}" type="audio/mpeg">
+            Votre navigateur ne supporte pas le lecteur audio.
+        </audio>
+    </div>
+    {% endif %}
+
+    <div class="article-content">
+        {{ content | safe }}
+    </div>
+
+    {% if author and not image %}
         <p class="author">Par {{ author }}</p>
     {% endif %}
 </article>

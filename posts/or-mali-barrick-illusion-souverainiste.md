@@ -5,6 +5,8 @@ layout: post.njk
 tags: post
 description: "Pendant que les réseaux souverainistes célèbrent la soumission de la multinationale canadienne au Mali, l'accord sur Loulo-Gounkoto démontre l'incapacité structurelle des régimes sahéliens à s'affranchir de la rente extractive."
 author: "Par la rédaction d'Afrique Décrypte"
+image: "/photos-blog/or-mali-barrick.jpg"
+podcast: "/podcasts/podcast-dialogue-mali.mp3"
 ---
 
 Par la rédaction d'Afrique Décrypte

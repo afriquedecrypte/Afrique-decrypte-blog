@@ -3,6 +3,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("logo-afrique-decrypte.png");
   eleventyConfig.addPassthroughCopy("photos-blog"); // Updated this line
+  eleventyConfig.addPassthroughCopy("podcasts");
 
   // Set up collections
   eleventyConfig.addCollection("post", function(collectionApi) {
