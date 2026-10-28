@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title or "Afrique Decrypte" }}</title>
+    {%- set metaDescription = description or "Analyses géopolitiques de l'Afrique : Realpolitik, histoire longue et réalités géo-anthropologiques." %}
+    <meta name="description" content="{{ metaDescription | escape }}">
+    <meta property="og:site_name" content="Afrique Decrypte">
+    <meta property="og:title" content="{{ (title or 'Afrique Decrypte') | escape }}">
+    <meta property="og:description" content="{{ metaDescription | escape }}">
+    <meta property="og:url" content="https://afriquedecrypte.netlify.app{{ page.url }}">
+    <meta property="og:type" content="{% if image %}article{% else %}website{% endif %}">
+    <meta property="og:image" content="https://afriquedecrypte.netlify.app{{ image or '/logo-afrique-decrypte.png' }}">
+    <meta name="twitter:card" content="{% if image %}summary_large_image{% else %}summary{% endif %}">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" href="/logo-afrique-decrypte.png" type="image/png">
 </head>

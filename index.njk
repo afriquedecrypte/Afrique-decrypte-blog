@@ -2,17 +2,29 @@
 layout: base.njk
 title: "Accueil"
 ---
-<p>Afrique Decrypte est un média audio et vidéo en ligne qui propose une analyse géopolitique approfondie et à long terme de l'Afrique. Il offre une contre-narrative aux perspectives occidentales conventionnelles, en se concentrant sur la "Realpolitik" et les réalités "géo-anthropologiques" pour expliquer les dynamiques politiques, économiques et sociales complexes à travers le continent.</p>
+<p class="intro">Afrique Decrypte est un média audio et vidéo en ligne qui propose une analyse géopolitique approfondie et à long terme de l'Afrique. Il offre une contre-narrative aux perspectives occidentales conventionnelles, en se concentrant sur la "Realpolitik" et les réalités "géo-anthropologiques" pour expliquer les dynamiques politiques, économiques et sociales complexes à travers le continent.</p>
 
 <h2>Derniers articles</h2>
 <ul class="post-list">
 {%- for post in collections.post | reverse -%}
-    <li class="post-card">
-        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-        <p class="date">Publié le {{ post.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
-        {% if post.data.description %}
-            <p>{{ post.data.description }}</p>
-        {% endif %}
+    {%- set thumb = post | thumbnail -%}
+    <li class="post-card{% if loop.first %} post-card--featured{% endif %}">
+        <a class="post-thumb" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
+            {% if thumb %}
+                <img src="{{ thumb }}" alt="" loading="{% if loop.first %}eager{% else %}lazy{% endif %}">
+            {% else %}
+                <span class="post-thumb-fallback"><img src="/logo-afrique-decrypte.png" alt=""></span>
+            {% endif %}
+            {% if loop.first %}<span class="post-badge">À la une</span>{% endif %}
+        </a>
+        <div class="post-body">
+            <p class="date">Publié le {{ post.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
+            <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+            {% if post.data.description %}
+                <p class="excerpt">{{ post.data.description }}</p>
+            {% endif %}
+            <a class="read-more" href="{{ post.url }}">Lire l'analyse →</a>
+        </div>
     </li>
 {%- endfor -%}
 </ul>

@@ -16,7 +16,7 @@ Ce que l'administration Trump a proposé à Lusaka n'est pas du chantage. C'est 
 
 <div class="article-images">
     <figure>
-        <img src="/photos-blog/danaid.png" alt="Le Tonneau des Danaïdes">
+        <img src="/photos-blog/danaide.png" alt="Le Tonneau des Danaïdes">
         <figcaption>Le Tonneau des Danaïdes</figcaption>
     </figure>
 </div>
