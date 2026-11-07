@@ -19,11 +19,15 @@ module.exports = function(eleventyConfig) {
     for (const src of [post.data.thumbnail, post.data.image]) {
       if (exists(src)) return src;
     }
-    const html = post.content || "";
-    const re = /<img[^>]+src=["']([^"']+)["']/gi;
-    let m;
-    while ((m = re.exec(html))) {
-      if (exists(m[1])) return m[1];
+    // Lire le fichier source (post.content n'est pas toujours prêt au moment du rendu de l'accueil)
+    let html = "";
+    try { html = fs.readFileSync(post.inputPath, "utf8"); } catch (e) { return null; }
+    const res = [/<img[^>]+src=["']([^"']+)["']/gi, /!\[[^\]]*\]\(([^)\s]+)/g];
+    for (const re of res) {
+      let m;
+      while ((m = re.exec(html))) {
+        if (exists(m[1])) return m[1];
+      }
     }
     return null;
   });
