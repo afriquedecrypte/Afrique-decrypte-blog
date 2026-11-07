@@ -55,14 +55,6 @@ L'objectif de l'opération Kabila n'est pas de marcher sur Kinshasa — une vill
 
 ---
 
-> 🗺️ **[RECOMMANDATION CARTOGRAPHIQUE]**
-> - **Objet** : *La fragmentation du Kivu : Corridors d'extraction minière et axes de projection du FRN/M23*.
-> - **Variables clés à figurer** :
->   1. Localisation des sites d'extraction de coltan et de cassitérite (Rubaya, Masisi, Walikale).
->   2. Axes d'évacuation logistique transfrontaliers convergeant vers Goma, Gisenyi et Kigali.
->   3. Déploiement tactique des brigades du FRN sous direction rwandaise face aux lignes des FARDC et de leurs supplétifs (milices Wazalendo et mercenaires est-européens).
->   4. Zone tampon de sanctuarisation économique coupant l'Est congolais de l'autorité centrale de Kinshasa.
-
 ---
 
 ### 3. L'effondrement de l'État-fiction à Kinshasa

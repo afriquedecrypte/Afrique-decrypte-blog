@@ -62,10 +62,6 @@ En rompant unilatéralement ce pacte ancestral, Alger a commis une triple erreur
 * **Elle ouvre un boulevard géopolitique à Rabat et à Haftar** : Privées de leur parrain algérien, les élites touareg et arabes de l'espace saharo-sahélien se tournent déjà vers de nouveaux protecteurs. Le Maroc, fort de son initiative royale pour l'accès des pays sahéliens à l'Atlantique, et le maréchal Khalifa Haftar, maître du Fezzan libyen, étendent leurs réseaux d'influence au cœur même de l'ancien pré carré algérien.
 * **Elle s'expose à une déstabilisation intérieure majeure** : La frontière entre le Mali et l'Algérie n'existe que sur le papier d'état-major. Les Kel Adagh de Kidal sont les cousins directs des Kel Ahaggar de Tamanrasset. En livrant les premiers aux massacres et aux exactions de l'Africa Corps russe et des milices de Bamako, le pouvoir militaire d'Alger suscite une rancœur incandescente chez ses propres citoyens du Sud, qui voient s'effondrer la dernière illusion d'une solidarité saharienne.
 
-> 🗺️ **[RECOMMANDATION CARTOGRAPHIQUE]**
-> - **Objet** : Carte tactique du front saharo-sahélien : l'axe gazier Alger-Niamey (TSGP), le cordon de confinement touareg et la ligne de cessez-le-feu au Sahara occidental
-> - **Variables clés à figurer** : Tracé du gazoduc transsaharien TSGP (Warri-Ajaokuta-Kaduna-Kano-Zinder-In Salah-Hassi R'Mel), bastions touareg de l'Azawad (Kidal, Tessalit, Tin Zaouatine) et de l'Aïr (Agadez), bases avancées de l'Africa Corps russe au Mali et au Niger, zones de contrôle des milices sahariennes et tracé du Mur des sables marocain au Sahara occidental.
-
 ---
 
 ### 3. Autopsie de l'École Autrichienne : 55 % de dépenses parasitaires et la mort annoncée de la rente

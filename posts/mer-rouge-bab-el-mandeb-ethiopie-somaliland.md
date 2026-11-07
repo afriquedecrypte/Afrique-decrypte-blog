@@ -77,15 +77,6 @@ En s'alliant avec Hargeisa pour ouvrir le corridor de Berbera, l'Éthiopie n'a p
 
 ---
 
-> 🗺️ **[RECOMMANDATION CARTOGRAPHIQUE]**
-> - **Objet** : *La bataille des ports et des corridors en mer Rouge : Le verrou de Bab el-Mandeb, l'enclave éthiopienne et l'échiquier des puissances*.
-> - **Variables clés à figurer** :
->   1. **Le goulet d'étranglement de Bab el-Mandeb** (détroit resserré de 29 km entre le Yémen houthiste, l'archipel des Sept Frères et Ras Siyyan à Djibouti) et le chenal de navigation maritime mondial.
->   2. **L'enclave éthiopienne** (120 millions d'habitants sans débouché côtier) et ses axes logistiques vitaux : le corridor ferroviaire Addis-Abeba–Djibouti (qui draine 90 % du fret) vs le corridor Berbera–Addis-Abeba réhabilité à travers le Somaliland.
->   3. **Le littoral stratégique du Somaliland (Berbera)** concédé sur 20 km à l'Éthiopie, matérialisant la frontière historique du protectorat britannique de 1884 face au reste de la Somalie italienne.
->   4. **Dispositifs et emprises militaires étrangères** : Bases multinationales de Djibouti (Camp Lemonnier américain, base chinoise de Doraleh, BA 188 française), méga-base turque TURKSOM à Mogadiscio, zones d'opérations des frégates turques et des contingents égyptiens déployés au sud.
->   5. **Fractures ethno-claniques structurales** : Répartition spatiale des clans Afar et Issa (Djibouti, Érythrée, Éthiopie), prédominance du clan Isaaq au Somaliland, et morcellement de la Somalie méridionale entre Darod (Puntland sécessionniste) et Hawiye (Mogadiscio assiégée).
-
 ---
 
 ### 3. Anatomie autrichienne de la Corne : la spoliation de l'État-rente face à l'ordre spontané marchand

@@ -49,14 +49,6 @@ Les mines de Loulo-Gounkoto et de Fekola sont situées à l'extrême ouest du Ma
 
 ---
 
-> 🗺️ **[RECOMMANDATION CARTOGRAPHIQUE]**
-> - **Objet** : *Les lignes de fuite de la rente aurifère au Mali : Enclaves d'extraction et circuits de prédation étatique*.
-> - **Variables clés à figurer** :
->   1. Localisation des grands complexes miniers de l'Ouest (Loulo-Gounkoto, Fekola, Syama) et terroirs ethniques d'ancrage (Malinké/Khassonké).
->   2. Vecteurs de ponction fiscale reliant les concessions minières au centre névralgique de Bamako.
->   3. Vecteurs de redistribution de la rente vers le théâtre opérationnel du Nord et du Centre (financement des milices locales et des supplétifs étrangers face aux insurrections Touareg / Peul).
->   4. Découplage territorial démontrant l'absence de retombées économiques sur les bassins de vie locaux.
-
 ---
 
 ### 3. L'impasse praxéologique de l'étatisme sahélien
